@@ -12,6 +12,30 @@
 					});
 				}
 			});
+
+			AFRAME.registerComponent('fusable', {
+				init: function () {
+					this.cursorEl = document.querySelector('a-cursor');
+					this.fusing = this.fusing.bind(this);
+					this.el.addEventListener('fusing', this.fusing);
+				},
+				fusing: function() {
+					this.cursorEl.dispatchEvent(new Event('start-fusing'));
+				},
+				remove: function() {
+					this.el.removeEventListener('fusing', this.fusing);
+				}
+			});
+
+			AFRAME.registerComponent('door-listener', {
+				init: function () {
+					var el = this.el;
+					this.el.addEventListener('click', function (evt) {
+						var camera = document.querySelector('a-camera');
+						el.dispatchEvent(new Event('open-door'));
+					});
+				}
+			});
 		</script> 
 	</head> 
 	<body> 
@@ -29,7 +53,9 @@
 			<a-sky color="rgb(100,100,255)"></a-sky>
 			
 			<a-camera position="0 1.5 0">
-				<a-cursor fuse ="true" fuse-timeout="750"><a-cursor>
+				<a-cursor fuse ="true" fuse-timeout="750">
+					<a-animation begin="start-fusing" easing="ease in" attribute="scale" dur="750" fill="backwards" from="1 1 1" to="0.2 0.2 0.2"></a-animation>
+				</a-cursor>
 			</a-camera>
 
 			<a-box position="0 2.5 -3" rotation="0 45 0" color="#4CC3D9" shadow></a-box>
@@ -67,6 +93,10 @@
 			<a-gltf-model scale="1.7 1.7 1.7" position="4.72 1.5 -5.6" rotation="0 360 0" src="#door" door-listener fusable clickable shadow></a-gltf-model>
 
 			<a-gltf-model scale="1.7 1.7 1.7" position="4 1.5 -6.61" rotation="0 90 0" src="#door" door-listener fusable clickable shadow></a-gltf-model>
+
+			<a-animation begin="open-door" attribute="rotation" to="0 -50 0" dur="1500"></a-animation>
+
+			<a-animation begin="open-door" attribute="position" to="-2.05 1.5 -5.5" dur="1500"></a-animation>
 		</a-scene>
 	</body> 
 </html> 
