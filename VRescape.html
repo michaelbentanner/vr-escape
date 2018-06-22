@@ -7,8 +7,8 @@
 				init: function () {
 					var el = this.el;
 					this.el.addEventListener('model-loaded', function () {
-						var cursorE1 = el.querySelector('[raycaster]');
-						cusorE1.components.raycaster.refreshObjects();
+						var cursorEl = el.querySelector('[raycaster]');
+						cursorEl.components.raycaster.refreshObjects();
 					});
 				}
 			});
@@ -88,15 +88,20 @@
 
 			<a-gltf-model scale="1.7 1.7 1.7" position="-3.7 1.5 -2" rotation="0 90 0" src="#sofa" shadow></a-gltf-model>
 
-			<a-gltf-model scale="1.7 1.7 1.7" position="-2.05 1.5 -5.6" rotation="0 -180 0" src="#door" door-listener fusable clickable shadow></a-gltf-model>
+			<a-gltf-model scale="1.7 1.7 1.7" position="-2.05 1.5 -5.6" rotation="0 -180 0" src="#door" door-listener fusable clickable shadow>
+				<a-animation begin="open-door" attribute="rotation" to="0 -50 0" dur="1500"></a-animation>
+				<a-animation begin="open-door" attribute="position" to="-2.05 1.5 -5.5" dur="1500"></a-animation>
+			</a-gltf-model>
 
-			<a-gltf-model scale="1.7 1.7 1.7" position="4.72 1.5 -5.6" rotation="0 360 0" src="#door" door-listener fusable clickable shadow></a-gltf-model>
+			<a-gltf-model scale="1.7 1.7 1.7" position="4.72 1.5 -5.6" rotation="0 360 0" src="#door" door-listener fusable clickable shadow>
+				<a-animation begin="open-door" attribute="rotation" to="0 -50 0" dur="1500"></a-animation>
+				<a-animation begin="open-door" attribute="position" to="-2.05 1.5 -5.5" dur="1500"></a-animation>
+			</a-gltf-model>
 
-			<a-gltf-model scale="1.7 1.7 1.7" position="4 1.5 -6.61" rotation="0 90 0" src="#door" door-listener fusable clickable shadow></a-gltf-model>
-
-			<a-animation begin="open-door" attribute="rotation" to="0 -50 0" dur="1500"></a-animation>
-
-			<a-animation begin="open-door" attribute="position" to="-2.05 1.5 -5.5" dur="1500"></a-animation>
+			<a-gltf-model scale="1.7 1.7 1.7" position="4 1.5 -6.61" rotation="0 90 0" src="#door" door-listener fusable clickable shadow>
+				<a-animation begin="open-door" attribute="rotation" to="0 -50 0" dur="1500"></a-animation>
+				<a-animation begin="open-door" attribute="position" to="-2.05 1.5 -5.5" dur="1500"></a-animation>
+			</a-gltf-model>
 		</a-scene>
 	</body> 
 </html> 
